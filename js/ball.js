@@ -25,6 +25,9 @@ class Ball{
         if (this.y+this.radius > CANVAS_HEIGHT) {
             this.vy *= -1
         } 
+        if (this.y-this.radius < 0){ //Top
+            this.vy *= -1
+        }
         // TODO : Do the same with the top
     }
 

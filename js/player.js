@@ -7,8 +7,7 @@ class Player{
     this.height = height
     this.color = color
     this.score = 0
-  /*   this.vy = vy
-    this.direction = undefined */
+  /* this.direction = undefined */
   }
 
   draw(ctx) {

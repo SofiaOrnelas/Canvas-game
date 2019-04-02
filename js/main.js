@@ -30,6 +30,10 @@ function drawEverything(ctx){
   ctx.fillText("ATP Tour", 20, 40); 
 
   // TODO: draw the score
+  ctx.fillStyle = "black";
+  ctx.font = "20px Arial"
+  ctx.fillText("Player1: "+player1.score, CANVAS_WIDTH-150, 50)
+  ctx.fillText("Player2: "+player2.score, CANVAS_WIDTH-150, 75)
 }
 
 function updateEverything(){
@@ -44,9 +48,12 @@ function updateEverything(){
     ball.vx *= -1
   }
   let looserNb = getLooser()
-  if (looserNb) {
     // TODO: update the score and replace the ball
+  if (looserNb === 1) {return player2.score++ // Player 1 lost 
   }
+  if (looserNb === 2) {return player1.score++ // Player 2 lost
+  }
+  ball.update()
 }
 
 function checkCollisionPlayer1(ball, player1) {
@@ -65,7 +72,9 @@ function checkCollisionPlayer2(ball, player2) {
 
 function getLooser() {
   // TODO
-  return undefined // No looser
+  if(ball.x < 0){return 1} // Player 1 lost
+  if (ball.x > CANVAS_WIDTH){return 2} //Player 2 lost 
+  else return undefined // No looser
   return 1 // Player 1 lost
   return 2 // Player 2 lost
 }
