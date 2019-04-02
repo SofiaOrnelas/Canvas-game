@@ -9,6 +9,8 @@ class Background{
             ctx.drawImage(img, 0, 0)
         }
     }
+
+    
 }
 
 
