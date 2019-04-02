@@ -25,25 +25,10 @@ class Ball{
         if (this.y+this.radius > CANVAS_HEIGHT) {
             this.vy *= -1
         } 
-        if (this.y-this.radius < 0){ //Top
+        // TODO : Do the same with the top
+        if (this.y-this.radius < 0){ 
             this.vy *= -1
         }
-        // TODO : Do the same with the top
     }
 
-/*     move(){
-        setInterval(() => {
-            this.x+=5
-            this.y+=5
-        }, 400);
-    } */
-
 }
-//if the ball touches the left or right border:
-/* if(this.x - this.radius < 0) { 
-    updateEverything()
-}
-if (this.x+this.radius>CANVAS_WIDTH){
-    updateEverything()
-}
- */

@@ -13,12 +13,12 @@ function animation(){
   drawEverything(ctx); 
   window.requestAnimationFrame(animation)
 }
+
 animation()
 
 function drawEverything(ctx){
-  bg.draw(ctx, "./img/tennis-court-1846813_1280.png")
-  /*bg.draw(ctx, "img/tennis-1605799_1280.png")*/
-  //ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+  // bg.draw(ctx, "./img/tennis-court-1846813_1280.png")
+  bg.draw(ctx, "img/tennis-1605799_1280.png")
   
   player1.draw(ctx)
   player2.draw(ctx)
@@ -37,7 +37,7 @@ function drawEverything(ctx){
 }
 
 function updateEverything(){
-  //bg.update()
+
   player1.update()
   player2.update()
   ball.update()
@@ -49,11 +49,18 @@ function updateEverything(){
   }
   let looserNb = getLooser()
     // TODO: update the score and replace the ball
-  if (looserNb === 1) {return player2.score++ // Player 1 lost 
+  if (looserNb === 1  ) {
+    ball.x = CANVAS_WIDTH/2;
+    ball.y = CANVAS_HEIGHT/2;
+    ball.update()
+    player2.score++ // Player 1 lost 
   }
-  if (looserNb === 2) {return player1.score++ // Player 2 lost
+  if (looserNb === 2) {
+    ball.x = CANVAS_WIDTH/2;
+    ball.y = CANVAS_HEIGHT/2;
+    ball.update()
+    player1.score++ // Player 2 lost
   }
-  ball.update()
 }
 
 function checkCollisionPlayer1(ball, player1) {
@@ -72,14 +79,14 @@ function checkCollisionPlayer2(ball, player2) {
 
 function getLooser() {
   // TODO
-  if(ball.x < 0){return 1} // Player 1 lost
-  if (ball.x > CANVAS_WIDTH){return 2} //Player 2 lost 
+  if(ball.x < 0){
+    return 1
+  } // Player 1 lost
+  if (ball.x > CANVAS_WIDTH){
+    return 2
+  } //Player 2 lost 
   else return undefined // No looser
-  return 1 // Player 1 lost
-  return 2 // Player 2 lost
 }
-
-// ball.move()
 
 window.onkeydown = function(event) {
   switch (event.keyCode) {
