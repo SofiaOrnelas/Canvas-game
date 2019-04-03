@@ -10,12 +10,12 @@ class Player{
   /* this.direction = undefined */
   }
 
-  draw(ctx) {
-    ctx.save()
-    ctx.fillStyle = this.color
-    ctx.fillRect(this.x, this.y, this.width, this.height)
+  draw(ctx, src) {
+    let img = new Image()
+    img.src = src
+    ctx.drawImage(img, this.x, this.y, this.width, this.height)
+    //ctx.fillRect(this.x, this.y, this.width, this.height)
 
-    ctx.restore()
   }
     
   moveUp(){
@@ -43,6 +43,17 @@ class Player{
     return this.y + this.height
   }
 
+/*   playerScore(){
+    for (let i=1; i<3; i++){
+      if (player[i].score === 0 && looserNb !== i){
+      player[i].score = 15
+    } else if (player[i].score === 15 && looserNb !== i){
+      player[i].score = 30
+    } else if (player[i].score === 30 && looserNb !== i){
+    player[i].score = 40
+    }
+  }
+} */
   
 }
 

@@ -3,8 +3,9 @@ var ctx = canvas.getContext('2d');
 const CANVAS_WIDTH = canvas.width
 const CANVAS_HEIGHT = canvas.height
 
-let player1 = new Player(0, 250, 20, 80, 'red')
-let player2 = new Player(CANVAS_WIDTH-20, 350, 20, 80, 'blue')
+let score = new Score()
+let player1 = new Player(0, 250, 75, 80, 'red')
+let player2 = new Player(CANVAS_WIDTH-75, 350, 75, 80, 'blue')
 let bg = new Background()
 let ball = new Ball()
 
@@ -17,23 +18,22 @@ function animation(){
 animation()
 
 function drawEverything(ctx){
-  // bg.draw(ctx, "./img/tennis-court-1846813_1280.png")
-  bg.draw(ctx, "img/tennis-1605799_1280.png")
-  
-  player1.draw(ctx)
-  player2.draw(ctx)
+  //bg.draw(ctx, "./img/tennis-court-1846813_1280.png")
+  bg.draw(ctx, "img/tennis_AF.png")
+
+  player1.draw(ctx, 'img/Raq_esq.png')
+  player2.draw(ctx, 'img/Raq_Dta.png')
 
   ball.draw(ctx)
 
-  ctx.fillStyle = "gold";
-  ctx.font = "30px Arial";
-  ctx.fillText("ATP Tour", 20, 40); 
 
   // TODO: draw the score
   ctx.fillStyle = "black";
-  ctx.font = "20px Arial"
-  ctx.fillText("Player1: "+player1.score, CANVAS_WIDTH-150, 50)
-  ctx.fillText("Player2: "+player2.score, CANVAS_WIDTH-150, 75)
+  ctx.font = "22px Ubuntu"
+  //ctx.fillText( "Game", 75, 25)
+  //ctx.fillText( "Set",  125, 25)
+  ctx.fillText("P1: "+score.getScore(1), 20, 50)
+  ctx.fillText("P2: "+score.getScore(2), 560, 50)
 }
 
 function updateEverything(){
@@ -52,14 +52,18 @@ function updateEverything(){
   if (looserNb === 1  ) {
     ball.x = CANVAS_WIDTH/2;
     ball.y = CANVAS_HEIGHT/2;
+    ball.vx = 0;
+    ball.vy = 0;
     ball.update()
-    player2.score++ // Player 1 lost 
+    score.increaseScore(2) // Player 1 lost 
   }
   if (looserNb === 2) {
     ball.x = CANVAS_WIDTH/2;
     ball.y = CANVAS_HEIGHT/2;
+    ball.vx = 0;
+    ball.vy = 0;
     ball.update()
-    player1.score++ // Player 2 lost
+    score.increaseScore(1) // Player 2 lost 
   }
 }
 
@@ -91,11 +95,21 @@ function getLooser() {
 window.onkeydown = function(event) {
   switch (event.keyCode) {
     case 38: // up (arrow)
-    player2.moveUp();
-    break;
+      player2.moveUp();
+      break;
     case 40: // down (arrow)
-    player2.moveDown();
-    break;
+      player2.moveDown();
+      break;
+    case 87: // up (W)
+      player1.moveUp();
+      break;
+    case 83: //down (S)
+      player1.moveDown();
+      break;
+    case 32: // space
+      if (ball.isStopped())
+        ball.launch();
+      break;
     /*     case 39: // right
     player1.x+=10;
       break;
@@ -104,12 +118,6 @@ window.onkeydown = function(event) {
       break; */
       
       
-      case 87: // up (W)
-      player1.moveUp();
-      break;
-      case 83: //down (S)
-      player1.moveDown();
-      break;
 /*     case 68: //
       player2.x+=10;
       break;

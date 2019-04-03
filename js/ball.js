@@ -2,8 +2,8 @@ class Ball{
     constructor(){
         this.x = CANVAS_WIDTH/2
         this.y = CANVAS_HEIGHT/2
-        this.vx = 2
-        this.vy = 1
+        this.vx = 0
+        this.vy = 0
         this.radius = 10
     }
 
@@ -29,6 +29,15 @@ class Ball{
         if (this.y-this.radius < 0){ 
             this.vy *= -1
         }
+    }
+
+    isStopped() {
+        return this.vx === 0 && this.vy === 0
+    }
+
+    launch() {
+        this.vx = 10
+        this.vy = 1
     }
 
 }
