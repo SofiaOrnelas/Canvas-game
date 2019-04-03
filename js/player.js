@@ -42,18 +42,6 @@ class Player{
   bottom() {
     return this.y + this.height
   }
-
-/*   playerScore(){
-    for (let i=1; i<3; i++){
-      if (player[i].score === 0 && looserNb !== i){
-      player[i].score = 15
-    } else if (player[i].score === 15 && looserNb !== i){
-      player[i].score = 30
-    } else if (player[i].score === 30 && looserNb !== i){
-    player[i].score = 40
-    }
-  }
-} */
   
 }
 
