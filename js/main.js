@@ -28,12 +28,7 @@ function drawEverything(ctx){
 
 
   // TODO: draw the score
-  ctx.fillStyle = "black";
-  ctx.font = "22px Ubuntu"
-  //ctx.fillText( "Game", 75, 25)
-  //ctx.fillText( "Set",  125, 25)
-  ctx.fillText("P1: "+score.getScore(1), 20, 50)
-  ctx.fillText("P2: "+score.getScore(2), 560, 50)
+  score.draw(ctx)
 }
 
 function updateEverything(){
