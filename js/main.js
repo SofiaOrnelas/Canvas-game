@@ -4,8 +4,8 @@ const CANVAS_WIDTH = canvas.width
 const CANVAS_HEIGHT = canvas.height
 
 let score = new Score()
-let player1 = new Player(0, 250, 75, 80, 'red')
-let player2 = new Player(CANVAS_WIDTH-75, 350, 75, 80, 'blue')
+let player1 = new Player(0, 250, 75, 80, 1)
+let player2 = new Player(CANVAS_WIDTH-75, 250, 75, 80, 2)
 let bg = new Background()
 let ball = new Ball()
 
@@ -74,6 +74,8 @@ function checkCollisionPlayer2(ball, player2) {
     && player2.x - ball.x < ball.radius 
     && player2.top() < ball.y 
     && ball.y < player2.bottom()
+    && player2.angleSpeed !== 0
+
 }
 
 function getLooser() {
@@ -89,6 +91,11 @@ function getLooser() {
 
 window.onkeydown = function(event) {
   switch (event.keyCode) {
+    // TODO: shoot when D is pressed
+
+    case 37: // left (arrow)
+      player2.shoot();
+      break;
     case 38: // up (arrow)
       player2.moveUp();
       break;
