@@ -2,10 +2,12 @@ var canvas = document.querySelector('canvas');
 var ctx = canvas.getContext('2d');
 const CANVAS_WIDTH = canvas.width
 const CANVAS_HEIGHT = canvas.height
+const MAX_ANGLE = 30*Math.PI/180 // 20 degrees
+var DEBUG = false
 
 let score = new Score()
-let player1 = new Player(0, 250, 75, 80, 1)
-let player2 = new Player(CANVAS_WIDTH-75, 250, 75, 80, 2)
+let player1 = new Player(0, 250, 75, 80, 1, 'img/trLeft.png')
+let player2 = new Player(CANVAS_WIDTH-75, 250, 75, 80, 2, 'img/trRight.png')
 let bg = new Background()
 let ball = new Ball()
 
@@ -21,8 +23,8 @@ function drawEverything(ctx){
   //bg.draw(ctx, "./img/tennis-court-1846813_1280.png")
   bg.draw(ctx, "img/tennis_AF.png")
 
-  player1.draw(ctx, 'img/Raq_esq.png')
-  player2.draw(ctx, 'img/Raq_Dta.png')
+  player1.draw(ctx)
+  player2.draw(ctx)
 
   ball.draw(ctx)
 
@@ -37,41 +39,36 @@ function updateEverything(){
   player2.update()
   ball.update()
   if (checkCollisionPlayer1(ball, player1)) {
-    ball.vx *= -1
+    ball.vx = Math.abs(ball.vx) // * 5*Math.abs(player1.angle) / MAX_ANGLE
+    ball.vy += Math.random()-0.5
   }
   if (checkCollisionPlayer2(ball, player2)) {
-    ball.vx *= -1
+    ball.vx = -Math.abs(ball.vx) // * 5*Math.abs(player2.angle) / MAX_ANGLE
+    ball.vy += Math.random()-0.5
   }
   let looserNb = getLooser()
     // TODO: update the score and replace the ball
   if (looserNb === 1  ) {
-    ball.x = CANVAS_WIDTH/2;
-    ball.y = CANVAS_HEIGHT/2;
-    ball.vx = 0;
-    ball.vy = 0;
-    ball.update()
     score.increaseScore(2) // Player 1 lost 
+    ball.reset()
   }
   if (looserNb === 2) {
-    ball.x = CANVAS_WIDTH/2;
-    ball.y = CANVAS_HEIGHT/2;
-    ball.vx = 0;
-    ball.vy = 0;
-    ball.update()
     score.increaseScore(1) // Player 2 lost 
+    ball.reset()
   }
 }
 
 function checkCollisionPlayer1(ball, player1) {
   return 0 < -(player1.x+player1.width) + ball.x 
-    && -(player1.x+player1.width) + ball.x < ball.radius 
+    && -(player1.x+player1.width) + ball.x < ball.radius + Math.abs(ball.vx)
     && player1.top() < ball.y 
     && ball.y < player1.bottom()
+    && player1.angleSpeed !== 0
 }
 
 function checkCollisionPlayer2(ball, player2) {
   return 0 < player2.x - ball.x 
-    && player2.x - ball.x < ball.radius 
+    && player2.x - ball.x < ball.radius + Math.abs(ball.vx)
     && player2.top() < ball.y 
     && ball.y < player2.bottom()
     && player2.angleSpeed !== 0
@@ -95,6 +92,8 @@ window.onkeydown = function(event) {
 
     case 37: // left (arrow)
       player2.shoot();
+      if (ball.isStopped() && score.playerNbWhoServing === 2)
+        ball.launch();
       break;
     case 38: // up (arrow)
       player2.moveUp();
@@ -102,30 +101,23 @@ window.onkeydown = function(event) {
     case 40: // down (arrow)
       player2.moveDown();
       break;
+    case 68: // rigth (D)
+      player1.shoot();
+      if (ball.isStopped() && score.playerNbWhoServing === 1)
+        ball.launch();
+      break;
     case 87: // up (W)
       player1.moveUp();
       break;
     case 83: //down (S)
       player1.moveDown();
       break;
-    case 32: // space
+   /*  case 32: // space
       if (ball.isStopped())
         ball.launch();
-      break;
-    /*     case 39: // right
-    player1.x+=10;
-      break;
-      case 37: // left
-      player1.x-=10;
       break; */
       
       
-/*     case 68: //
-      player2.x+=10;
-      break;
-    case 65: //
-      player2.x-=10;
-      break; */
   }
   window.onkeyup = function(event) {
     switch (event.keyCode) {
@@ -143,5 +135,4 @@ window.onkeydown = function(event) {
         break;
     }
   }
-  console.log(event.keyCode)
 };

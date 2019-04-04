@@ -1,3 +1,16 @@
 canvas{
-    border: 1px solid black;
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    height: 100vh;
+    margin: 0;
+    background-image: url('img/1024x768-AO-2017-700x450.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+ 
+ }

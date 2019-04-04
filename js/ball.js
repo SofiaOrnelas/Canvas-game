@@ -1,10 +1,7 @@
 class Ball{
     constructor(){
-        this.x = CANVAS_WIDTH/2
-        this.y = CANVAS_HEIGHT/2
-        this.vx = 0
-        this.vy = 0
         this.radius = 10
+        this.reset()
     }
 
     draw(ctx){
@@ -36,8 +33,25 @@ class Ball{
     }
 
     launch() {
-        this.vx = 10
-        this.vy = 1
+        if (score.playerNbWhoServing === 1){
+            this.vx = 10
+            this.vy = 2
+        }
+        else{
+            this.vx = -10
+            this.vy = 2 
+        }
+    }
+    reset() {
+        if (score.playerNbWhoServing === 1){
+            this.x = player1.width;
+        }
+        else {
+            this.x = CANVAS_WIDTH - player2.width;
+        }
+        this.y = CANVAS_HEIGHT/2;
+        this.vx = 0;
+        this.vy = 0;
     }
 
 }
