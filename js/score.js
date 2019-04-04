@@ -28,14 +28,35 @@ class Score {
             this.nbOfGamesPlayer2 = 0;
             this.nbOfPointsPlayer2 = 0;
         }
-        else if (playerNb === 1 && this.nbOfPointsPlayer1 === 40){
+        else if (playerNb === 1 && this.nbOfPointsPlayer1 === 40 && this.nbOfPointsPlayer2 !==40){
             this.nbOfGamesPlayer1++ 
             this.nbOfPointsPlayer1 = 0;
-        }
-        else if(playerNb === 2 && this.nbOfPointsPlayer2 === 40){
-            this.nbOfGamesPlayer2++
             this.nbOfPointsPlayer2 = 0;
         }
+        else if(playerNb === 2 && this.nbOfPointsPlayer2 === 40 && this.nbOfPointsPlayer1 !==40){
+            this.nbOfGamesPlayer2++
+            this.nbOfPointsPlayer2 = 0;
+            this.nbOfPointsPlayer1 = 0;
+        } 
+
+        else if (playerNb === 1 && this.nbOfPointsPlayer1 === 40 && this.nbOfPointsPlayer2 ===40){
+            this.nbOfPointsPlayer1 = "40a";
+        }
+        else if (playerNb === 2 && this.nbOfPointsPlayer2 === 40 && this.nbOfPointsPlayer1 ===40){
+            this.nbOfPointsPlayer2 = "40a";
+        }
+
+        else if (playerNb === 1 && this.nbOfPointsPlayer1 === "40a"){
+            this.nbOfGamesPlayer1++
+            this.nbOfPointsPlayer2 = 0;
+            this.nbOfPointsPlayer1 = 0;
+        }
+        else if (playerNb === 2 && this.nbOfPointsPlayer2 === "40a"){
+            this.nbOfGamesPlayer2++
+            this.nbOfPointsPlayer2 = 0;
+            this.nbOfPointsPlayer1 = 0;
+        }
+        
         else if (playerNb === 1 && this.nbOfPointsPlayer1 === 30) {
             this.nbOfPointsPlayer1 += 10
         }
