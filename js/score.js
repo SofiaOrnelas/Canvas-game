@@ -83,6 +83,15 @@ class Score {
         this.nbOfGamesPlayer2 = 0;
         this.nbOfPointsPlayer1 = 0;
         this.nbOfPointsPlayer2 = 0;
+        if (this.nbOfSetsPlayer1 === 3) {
+            this.nbOfSetsPlayer1 = 0;
+            this.nbOfSetsPlayer2 = 0;
+            this.nbOfGamesPlayer1 = 0;
+            this.nbOfGamesPlayer2 = 0;
+            this.nbOfPointsPlayer1 = 0;
+            this.nbOfPointsPlayer2 = 0;
+        }
+
 
         let sumSets = this.nbOfSetsPlayer1 + this.nbOfSetsPlayer2
         this.playerNbWhoServing = sumSets%2 + 1
