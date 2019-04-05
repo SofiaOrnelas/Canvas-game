@@ -7,7 +7,13 @@ body {
     height: 100vh;
     margin: 0;
     background-image: url('img/tennis-balls-mod.jpg');
-    background-size: 100% 100%;
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
  
+ }
+
+ canvas{
+     min-height: 80vw;
+     max-width: 100vw;
  }
