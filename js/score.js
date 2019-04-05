@@ -99,26 +99,3 @@ class Score {
         ctx.fillText("P2: "+score.getScore(2), 540, 50)
     }
 }
-
-/* 
-if(nbOfPointsPlayer1 === 40 && nbOfPointsPlayer2 !== 40) {
-    console.log('game');
-  }
-    
-  if(nbOfPointsPlayer1 == 0) {
-    nbOfPointsPlayer1 = 15;
-  }
-  else if(nbOfPointsPlayer1 == 15) {
-    nbOfPointsPlayer1 = 30;
-  }
-  else {
-    nbOfPointsPlayer1 = 40;
-  }
-  
-  if( nbOfPointsPlayer1 == 40 && nbOfPointsPlayer2 == 40) {
-    console.log('deuce');
-  }
-
-
-  
-} */

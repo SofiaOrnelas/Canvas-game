@@ -10,17 +10,48 @@ let player1 = new Player(0, 250, 75, 80, 1, 'img/trLeft.png')
 let player2 = new Player(CANVAS_WIDTH-75, 250, 75, 80, 2, 'img/trRight.png')
 let bg = new Background()
 let ball = new Ball()
+let page = 'home'
 
 function animation(){
+  if (page === 'home'){
+    drawHomePage()
+  }
+  if (page === 'game'){
   updateEverything()
   drawEverything(ctx); 
+  }
   window.requestAnimationFrame(animation)
 }
 
 animation()
 
+function drawHomePage() {
+  ctx.save()
+  
+  // Black Background
+  
+  ctx.fillStyle = "black"
+  ctx.fillRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT)
+  
+  
+  // Text
+  ctx.fillStyle = "white"
+  ctx.font = "30px ubuntu"
+  ctx.textAlign = "center"
+  ctx.fillText("Instructions:",CANVAS_WIDTH/ 2, 100)
+  ctx.font = "20px ubuntu"  
+  ctx.fillText("P1: To shoot, press 'D'", CANVAS_WIDTH*0.20, 170)
+  ctx.fillText("P1: To move up press 'W'", CANVAS_WIDTH*0.20, 190)
+  ctx.fillText("P1: To move down, press 'S'", CANVAS_WIDTH*0.20, 210)
+  ctx.fillText("P2: To shoot, press left arrow", CANVAS_WIDTH*0.7, 170)
+  ctx.fillText("P2: To move up press up arrow", CANVAS_WIDTH*0.7, 190)
+  ctx.fillText("P2: To move down, press down arrow", CANVAS_WIDTH*0.7, 210)
+  ctx.fillText("Press Space to Start", CANVAS_WIDTH/ 2, 300)
+
+  ctx.restore()
+}
+
 function drawEverything(ctx){
-  //bg.draw(ctx, "./img/tennis-court-1846813_1280.png")
   bg.draw(ctx, "img/tennis_AF.png")
 
   player1.draw(ctx)
@@ -112,10 +143,9 @@ window.onkeydown = function(event) {
     case 83: //down (S)
       player1.moveDown();
       break;
-   /*  case 32: // space
-      if (ball.isStopped())
-        ball.launch();
-      break; */
+   case 32: // space
+      page = "game";
+      break; 
       
       
   }

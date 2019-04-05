@@ -11,7 +11,6 @@ class Player {
     this.angleSpeed = 1
     this.img = new Image()
     this.img.src = src
-    /* this.direction = undefined */
   }
 
   draw(ctx) {
