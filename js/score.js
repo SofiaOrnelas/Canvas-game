@@ -106,5 +106,6 @@ class Score {
         //ctx.fillText( "Set",  125, 25)
         ctx.fillText("P1: "+score.getScore(1), 20, 50)
         ctx.fillText("P2: "+score.getScore(2), 540, 50)
+        
     }
 }
